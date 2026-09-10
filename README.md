@@ -91,12 +91,12 @@ ollama serve
 
 ## 安装项目依赖
 
-先把项目下载到电脑，并打开终端进入项目文件夹。
+先把项目下载到电脑，并打开终端进入项目文件夹，请用自己的目录，这里只是主包个人目录示例
 
 ### macOS
 
 ```bash
-cd /Users/xhangge/Desktop/personal_proj/xh-snowcat-learning-assistant
+cd <你自己的目录喵>
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
@@ -114,7 +114,7 @@ python -m pip install -r requirements.txt
 ### Windows PowerShell
 
 ```powershell
-cd C:\Users\你的用户名\Desktop\personal_proj\xh-snowcat-learning-assistant
+cd <你自己的目录喵>
 py -3 -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
@@ -146,11 +146,16 @@ python main.py
 也可以不激活虚拟环境，直接运行项目自带的 Python：
 
 ```bash
-/Users/xhangge/Desktop/personal_proj/xh-snowcat-learning-assistant/.venv/bin/python main.py
+<你自己的目录喵>/xh-snowcat-learning-assistant/.venv/bin/python main.py
 ```
 
 以后再次启动软件，最简单的完整命令是：
 
+```bash
+cd <你自己的目录喵>/xh-snowcat-learning-assistant
+.venv/bin/python main.py
+```
+以主包放在桌面的目录为例：
 ```bash
 cd /Users/xhangge/Desktop/personal_proj/xh-snowcat-learning-assistant
 .venv/bin/python main.py
@@ -172,9 +177,9 @@ python main.py
 
 启动后应该依次看到：
 
-1. 一个写着“支持 xhangge 请帮忙点个 star 喵”的启动弹窗。
+1. 一个写着“支持 xhangge 请帮忙点个 star 喵”的启动弹窗，求🙏star哦谢谢！。
 2. 粉色风格的 XH雪花喵学习助手主窗口。
-3. 左侧的会话列表、用户名设置、主题选择和学习模式选择。
+3. 左侧的会话列表、用户名设置、主题选择和学习模式选择。（还有本人随便的测试对话）
 4. 底部的输入框。
 5. 输入“什么是光合作用？”并按 Enter 后，雪花喵开始逐段回答。
 
@@ -227,7 +232,7 @@ xh-snowcat-learning-assistant/
 3. 用它替换项目中的 `assets/icon.png`。
 4. 重新启动程序，或重新打包程序。
 
-建议使用正方形图片，例如 256 x 256 像素。
+建议使用正方形图片哦～，例如 256 x 256 像素。
 
 ## 打包成桌面程序
 

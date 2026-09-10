@@ -8,6 +8,11 @@ XH雪花喵学习助手是一款运行在电脑上的本地 AI 学习软件，�
 
 ## 功能展示（第一次上传请见谅，，🥺🥺）
 
+### 0.界面展示
+
+<img width="1093" height="728" alt="截屏2026-09-10 14 50 51" src="https://github.com/user-attachments/assets/7b676075-7b83-471b-959f-4720b2a85148" />
+
+
 ### 1. 本地 AI 对话
 
 - 使用本地 Ollama 调用 `qwen2.5:7b` 模型。

@@ -1,0 +1,8 @@
+# Author: xhangge
+# This project is created by xhangge
+# XH雪花喵学习助手 依赖清单
+# 安装命令：pip install -r requirements.txt
+
+PySide6>=6.4        # 桌面界面框架（Qt6 官方 Python 版）
+requests>=2.28      # 负责和本地 Ollama 服务通信（HTTP 请求）
+pyinstaller>=6.0    # 把程序打包成 .app / .exe 桌面应用（打包阶段才用）

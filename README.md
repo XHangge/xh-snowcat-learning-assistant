@@ -4,7 +4,7 @@ snowcat（XH雪花喵学习助手）是一款运行在自己电脑上的 AI 学�
 
 所有数据默认只保存在本机sqlite，不需要登录，也不会自动上传云端。
 
-作者：Made by xhangge 💖
+作者：xhangge 💖
 
 ## v1.0 都有什么
 
@@ -222,7 +222,7 @@ xh-snowcat-learning-assistant/
     └── xhangge_eval_data.py      #   评测语料 + 100 条 QA
 ```
 
-分层规矩：`gui` 只显示和转发；AI 逻辑全在 `services`；数据全在 `models`；参数和提示词全在 `config`。想改行为先去对应层找，不会迷路喵。
+分层规矩：`gui` 只显示和转发；AI 逻辑全在 `services`；数据全在 `models`；参数和提示词全在 `config`。想改行为先去对应层找哦。
 
 ## 数据保存位置
 

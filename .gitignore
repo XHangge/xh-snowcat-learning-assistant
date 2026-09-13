@@ -1,18 +1,21 @@
-# Author: xhangge
-# This project is created by xhangge
-# Git 忽略清单：下面这些文件/文件夹不需要上传到 GitHub
-
-# Python 运行时产生的缓存
+# Python 缓存
 __pycache__/
 *.pyc
 
-# 虚拟环境（每个人的电脑上自己生成）
+# 虚拟环境（各种名字的都要忽略）
 .venv/
+.venv_win/
+.venv_py39_backup/
 
 # PyInstaller 打包产物
 build/
 dist/
 *.spec
 
-# 系统文件
+# IDE / 系统文件
+.idea/
 .DS_Store
+
+# 本地模型
+local_model/
+*.gguf

@@ -1,96 +1,97 @@
-# XH雪花喵学习助手
+# snowcat · XH雪花喵学习助手 v1.0
 
-XH雪花喵学习助手是一款运行在电脑上的本地 AI 学习软件，使用 Ollama 在本机运行 `qwen2.5:7b` 模型，为啥不用更好的，你可以自己配，，，主包先用这个了，，，，
+snowcat（XH雪花喵学习助手）是一款运行在自己电脑上的 AI 学习助手。可爱的猫娘「雪花喵」snowcat 可以陪你聊天答疑，还能自己动手查资料、翻你的自定义知识库、整理学习文档、还有帮你写文件和跑代码。
 
-所有聊天内容默认保存在自己的电脑上，不需要登录，也不会自动上传到云端，是不是很方便喵😁
+所有数据默认只保存在本机sqlite，不需要登录，也不会自动上传云端。
 
-作者：XHangge
+作者：Made by xhangge 💖
 
-## 功能展示（第一次上传请见谅，，🥺🥺）
+## v1.0 都有什么
 
-### 0.界面与图标展示
-####界面：
-<img width="1093" height="728" alt="截屏2026-09-10 14 50 51" src="https://github.com/user-attachments/assets/7b676075-7b83-471b-959f-4720b2a85148" />
-####图标：
-<img width="256" height="256" alt="icon" src="https://github.com/user-attachments/assets/33a17fc3-5ba9-44b4-a289-63623eb3aa6c" />
+v1.0 是一次大升级！一共五大模块：
 
+### 1. 💬 普通聊天 + 三种学习模式
 
-### 1. 本地 AI 对话
+- 云端api自己配即可喵！本地 Ollama 跑 `qwen2.5:7b` 或其它本地，回答逐字打出（打字机效果），等待时不卡界面。
+- 三种学习模式（左侧边栏最下方切换）：
+  - **简单说**：最简单最直白最一针见血的说明白。
+  - **仔细说**：给你往死里掰开揉碎了讲并且扩展的讲
+  - **教XX~**：固定三段——先最通俗易懂最直白的讲，再上专业术语的讲，最后给 3 个延伸问题给你扩展。
+- 多会话管理：新建 / 切换 / 重命名 / 删除
 
-- 使用本地 Ollama 调用 `qwen2.5:7b` 模型。
-- 回答会逐段出现，像打字一样，等待时不会卡住界面。
-- 当前会话的历史消息会一起发送给模型，因此雪花喵能够记住本次会话前面聊过的内容。
+### 2. 📖 学习文档 Skill（把聊天变成复习资料）
 
-### 2. 三种学习模式
+- 输入框上方点「📖 学习文档喵」，或者消息里直接说「生成学习文档」「浅浅学喵」。
+- 四种产物：
+  - 📄 普通学习文档（结构化的 md）
+  - 🌸 浅浅学喵：10–20 题问答集
+  - 📖 中中学喵：20–30 题
+  - 🎓 重重学喵：30–50 题
+- 只整理「聊过的内容」，不凭空编造；之前生成过的旧资料不会被打包抄进新文档。
+- 每份资料下方有「💾 导出喵」按钮，一键存成 `.md` 文件（选目录 → 可爱进度条 → 导出成功喵）。
 
-- **简单说喵～**：用一两句话快速说明最重要的内容，如果是什么简单翻译和名词解释啥的用这个。
-- **仔细说喵～**：详细解释知识点，并联系相关内容举一反三，如果是详细了解的事件用这个。
-- **教杂狗喵～**：固定分为三段：先用小朋友也能听懂的方式解释，再用专业语言解释，最后给出 3 个延伸问题，深度学习一个很大的知识用这个。
+### 3. 📚 知识库 RAG（让雪花喵翻你的私人文档）
 
-### 3. 雪花喵人设
+- 点标题栏 📚 打开知识库窗口：建库（最多 10 个）、导入文件（拖拽或选文件都行，支持 pdf / txt / md / docx）。
+- 单库容量 30MB；每个会话最多绑定 3 个库；绑定后打开「🔍 回答时翻知识库」，提问会自动检索最相关的资料片段再作答。
+- 检索用的向量化模型是本地 Ollama 的 `bge-m3`——所以**用知识库时 Ollama 要开着**。
+- 删文件按「文件」精确删（只删保存的副本）。
 
-雪花喵就是是一只可爱的猫咪涅～所以被骂杂狗也不要生气呦～。
+### 4. 🤖 Agent 模式（雪花喵自己动手干活）
 
-### 4. 会话管理
+- 输入框上方点开「🤖 Agent 喵」胶囊开关进入（每个会话各自记住自己的模式）。
+- 七个工具：联网搜索（DuckDuckGo 免费可用，Tavily 可选不过要自己配 apikey）、查知识库、读文件、写文件、删文件、跑命令、经验笔记。
+- **三道防线，hitp＆sandbox 机制实现 snowcatharness**：
+  1. 所有改文件、跑命令只发生在你在设置里选的「工作目录」里，越界直接拦下；
+  2. 命令有关机级黑名单 + 超时掐断；
+  3. 写文件 / 删文件 / 跑命令每一次都会**弹窗让你点同意**（不同意就放弃，模型会老实汇报）。
+- 干活过程实时显示在「行动卡片」上（🔍 搜索了什么、✏️ 写了什么、⌨️ 跑了什么）。
+- 自进化：Agent 觉得有用的经验会记进笔记，下次任务开场自动带上。
 
-- 使用 SQLite 保存聊天记录。
-- 不同会话彼此隔离。
-- 可以新建会话、切换会话、重命名会话和删除会话。
-- 每个会话第一次提问后，会自动使用问题的前 20 个字作为标题。
-- 关闭软件后再次打开，历史记录仍然存在。
+### 5. ⚙️ 模型随便换（本地 / 在线二选一）
 
-### 5. 桌面界面
+- **本地**：设置 → 🧠 模型喵 → 选模型 → 没下载的点「⬇️ 一键下载喵」（带可爱进度条）。
+- **在线**：填 OpenAI 兼容接口（DeepSeek、通义千问、Moonshot 等都行）→ 点「保存并使用」会**先真实测试一次**，通过才启用——地址打错、Key 不对都不会把你卡死，本地模型继续顶上。
+- 本地和在线互斥，切换即时生效，不用重启。
+- 设置窗还有：🎨 外观（三套主题即时换肤）、👤 我的信息（昵称 + 上传圆形头像）、🤖 Agent（工作目录、沙箱超时）、🔍 搜索（引擎和 Key）、ℹ️ 关于。
 
-- 粉色、亮色、暗色三套主题。
-- 可以设置用户名；不设置时默认称呼为“杂狗”。
-- 可以把窗口固定在其它软件上方。
-- 左侧边栏可以打开或关闭。
-- 提供可替换的 `assets/icon.png` 占位图标。
-- 每次启动会显示支持 xhangge 点 star 的提示弹窗。
+### 界面
+
+- 圆角矩形窗口 + 三套主题（粉色 / 亮色 / 暗色），粉发猫娘形象贯穿全软件（头像、图标、启动画面）。
+- 启动时有 splash 画面：猫娘大头像 + 「snowcat～」粉色艺术字。
+- 聊天区自动吸底：打开会话停在最新消息，流式输出自动跟随；你往上翻历史时会暂停跟随，不打扰阅读。
 
 ## 环境要求
 
-建议使用以下环境：
-
-- macOS 或 Windows
-- Python 3.10 或更高版本
-- Ollama
-- Ollama 模型 `qwen2.5:7b`
-- 能够运行 7B 模型的内存和磁盘空间，配置低别跑了，，，，会卡死的
-
-本项目在 macOS Sequoia、Apple Silicon、Python 3.9.6 环境下已经实际测试通过。新电脑建议安装 Python 3.10 或更高版本，以获得更好的第三方库兼容性，，，，
+- macOS（Apple Silicon 实测通过，不过版本比较低只能有部分功能）或 Windows
+- Python **3.10 或更高**（3.12.7 实测通过；LangGraph 系列要求 ≥3.10）
+- Ollama + 两个模型：`qwen2.5:7b`（对话）和 `bge-m3`（知识库向量化）
+- 能跑 7B 模型的内存和磁盘
 
 ## 安装 Ollama 和模型
 
 ### 第一步：安装 Ollama
 
-打开 Ollama 官方下载页面：
+去 <https://ollama.com/download> 下载对应系统的安装包，按向导装好。
 
-<https://ollama.com/download>
+### 第二步：下载两个模型
 
-根据自己的系统下载安装程序，然后按照安装向导完成安装。
-
-### 第二步：下载模型
-
-打开终端（Windows 用户可以打开 PowerShell），运行：
+打开终端运行：
 
 ```bash
-ollama pull qwen2.5:7b
+ollama pull qwen2.5:7b #或者其它也都行
+ollama pull bge-m3
 ```
 
-第一次下载需要一些时间，因为模型文件比较大。看到下载完成或命令返回到输入提示符，通常就表示成功。
+模型文件比较大（qwen2.5:7b 约 4.7GB），第一次需要等一会。也可以在软件里点「⬇️ 一键下载喵」。
 
-### 第三步：检查模型
-
-运行：
+### 第三步：检查
 
 ```bash
 ollama list
 ```
 
-如果列表中出现 `qwen2.5:7b`，说明模型已经安装好。
-
-Ollama 通常会在后台运行。如果软件提示无法连接 Ollama，可以手动启动服务：
+列表里出现 `qwen2.5:7b` 和 `bge-m3` 就绪。Ollama 平时在后台常驻；软件提示连不上时可以手动启动：
 
 ```bash
 ollama serve
@@ -98,12 +99,12 @@ ollama serve
 
 ## 安装项目依赖
 
-先把项目下载到电脑，并打开终端进入项目文件夹，请用自己的目录，这里只是主包个人目录示例
+先把项目下载到电脑，打开终端进入项目文件夹。
 
 ### macOS
 
 ```bash
-cd <你自己的目录喵>
+cd /path/to/xh-snowcat-learning-assistant
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
@@ -113,58 +114,42 @@ python -m pip install -r requirements.txt
 每条命令的作用：
 
 1. `cd`：进入项目文件夹。
-2. `python3 -m venv .venv`：创建一个只属于本项目的 Python 小环境。
-3. `source .venv/bin/activate`：打开这个小环境。
-4. `python -m pip install --upgrade pip`：更新安装工具。
-5. `python -m pip install -r requirements.txt`：安装项目需要的所有依赖。
+2. `python3 -m venv .venv`：创建只属于本项目的 Python 虚拟环境。
+3. `source .venv/bin/activate`：激活它。
+4. `python -m pip install --upgrade pip`：升级安装工具。
+5. `python -m pip install -r requirements.txt`：装齐全部依赖（版本都已锁定）。
 
 ### Windows PowerShell
 
 ```powershell
-cd <你自己的目录喵>
+cd C:\Users\你的用户名\Desktop\xh-snowcat-learning-assistant
 py -3 -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-如果 PowerShell 提示不允许执行脚本，可以只对当前用户执行一次：
+如果 PowerShell 提示不允许执行脚本，先对当前用户执行一次：
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```
 
-然后重新执行激活命令：
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
 ## 运行软件
 
-### macOS
+### macOS（推荐：双击启动）
 
-如果当前终端已经激活虚拟环境，运行：
+项目里自带一个叫 **snowcat** 的启动器（`snowcat.app`），双击它即可：
 
-```bash
-python main.py
-```
+- 菜单栏和 Dock 会显示 **snowcat** 和猫娘图标（而不是「Python」）；
+- 它会自动用项目的虚拟环境原生（arm64）运行，双击和命令行行为完全一致。
 
-也可以不激活虚拟环境，直接运行项目自带的 Python：
+把 `snowcat.app` 拖进程序坞、或在桌面创建替身，就是你的快捷方式。
 
-```bash
-<你自己的目录喵>/xh-snowcat-learning-assistant/.venv/bin/python main.py
-```
-
-以后再次启动软件，最简单的完整命令是：
+命令行启动也可以：
 
 ```bash
-cd <你自己的目录喵>/xh-snowcat-learning-assistant
-.venv/bin/python main.py
-```
-以主包放在桌面的目录为例：
-```bash
-cd /Users/xhangge/Desktop/personal_proj/xh-snowcat-learning-assistant
+cd /path/to/xh-snowcat-learning-assistant
 .venv/bin/python main.py
 ```
 
@@ -174,158 +159,150 @@ cd /Users/xhangge/Desktop/personal_proj/xh-snowcat-learning-assistant
 python main.py
 ```
 
-如果没有激活虚拟环境，可以直接运行：
-
-```powershell
-.venv\Scripts\python.exe main.py
-```
+（没激活虚拟环境时用 `.venv\Scripts\python.exe main.py`）
 
 ## 运行成功的表现
 
-启动后应该依次看到：
+1. 先看到启动画面：悬浮的猫娘大头像 + 「snowcat～」粉色艺术字；
+2. 出现「支持 xhangge 请帮忙点个 star 喵」弹窗；
+3. 圆角的主窗口出现（默认粉色主题）；
+4. 输入「什么是光合作用？」按 Enter，雪花喵开始逐字回答。
 
-1. 一个写着“支持 xhangge 请帮忙点个 star 喵”的启动弹窗，求🙏star哦谢谢！。
-2. 粉色风格的 XH雪花喵学习助手主窗口。
-3. 左侧的会话列表、用户名设置、主题选择和学习模式选择。（还有本人随便的测试对话）
-4. 底部的输入框。
-5. 输入“什么是光合作用？”并按 Enter 后，雪花喵开始逐段回答。
+Ollama 没开也不会崩溃，会有友好的提示弹窗告诉你怎么办。
 
-如果模型没有启动，软件会弹出提示，不会因为无法连接而直接崩溃。
+## 快速上手
 
-## 项目结构说明
+1. **聊天**：随便问，左侧边栏换学习模式试试三种讲法。
+2. **学习文档**：聊两轮后点「📖 学习文档喵」→ 浅浅学喵，得到一份问答集，点「💾 导出喵」存成文件。
+3. **知识库**：点 📚 → 新建库 → 拖一个 pdf/txt 进去 → 绑定到当前会话 → 打勾「回答时翻知识库」→ 问文件里的内容。
+4. **Agent**：⚙️ 设置 → 🤖 Agent 喵 → 选一个工作目录（建议建个空文件夹）→ 聊天区点开「🤖 Agent 喵」→ 说「在工作目录里创建一个学习计划.txt」→ 确认弹窗点同意/拒绝都试试。
+5. **换模型**：⚙️ 设置 → 🧠 模型喵 → 一键下载别的本地模型，或填在线 API。
+
+## 项目结构说明（目前架构有点乱，后续会对当前架构进行优化，现在能跑就行，，，，）
 
 ```text
 xh-snowcat-learning-assistant/
-├── main.py                  # 程序入口，负责启动 Qt 应用和主窗口
-├── requirements.txt         # Python 依赖清单
-├── .gitignore               # Git 不需要上传的文件清单
-├── README.md                # 项目说明文档
-├── LICENSE                  # MIT 开源协议
+├── main.py                       # 程序入口（splash → 主窗口 → 启动检查 + 状态预探测）
+├── requirements.txt              # 依赖清单（版本锁定）
+├── snowcat.spec                  # PyInstaller 打包配置（含体积优化排除表）
+├── snowcat.app/                  # macOS 双击启动器（菜单栏显示 snowcat）
+├── local_model/                  # 本地 gguf 模型目录（「一键部署」下载到这里）
 ├── assets/
-│   └── icon.png             # 软件图标占位图，可以替换成自己的图片
-├── core/
-│   ├── __init__.py          # core Python 包标记文件
-│   ├── xhangge_config.py    # 模型、路径、默认设置等全局配置
-│   ├── prompts.py           # 雪花喵人设和三种学习模式提示词
-│   ├── database.py           # SQLite 数据库操作
-│   └── ollama_client.py      # Ollama 请求和流式输出线程
-└── ui/
-    ├── __init__.py          # ui Python 包标记文件
-    ├── themes.py            # 粉色、亮色、暗色主题
-    ├── dialogs.py            # 启动、重命名、确认等弹窗
-    ├── sidebar.py            # 左侧边栏和会话列表
-    ├── chat_area.py          # 聊天气泡、输入框和流式显示
-    └── main_window.py        # 主窗口和各模块之间的调度
+│   ├── icon.png / icon.icns      # 应用图标（猫娘）
+│   ├── xhangge_splash_text.png   # 启动画面艺术字
+│   ├── xhangge_cursor_*.png      # 粉色光标（猫爪 / 小手 / I型 / 双向箭头 / 对勾）
+│   └── xhangge_catgirl/          # 猫娘形象素材（头像/立绘/跑步动画）
+├── config/                       # 配置层：全局参数 + 全部提示词
+│   ├── xhangge_settings.py       #   路径、上限、默认值、gguf 下载地址
+│   └── xhangge_prompts.py        #   人设、学习模式、技能、Agent、RAG、重排模板
+├── models/                       # 数据层：SQLite + 数据结构
+│   ├── xhangge_db.py             #   会话/消息/知识库/模型配置 全部表操作
+│   └── xhangge_schemas.py        #   数据类（知识库信息、检索片段等）
+├── services/                     # 服务层：所有 AI 逻辑（界面不碰这些）
+│   ├── xhangge_chat_service.py   #   聊天线程（流式 + 错误翻译）
+│   ├── xhangge_llm_router.py     #   模型路由（本地/在线互斥、热切换）
+│   ├── xhangge_ollama_deploy.py  #   Ollama 安装 / 模型下载 / 状态探测（带缓存）
+│   ├── xhangge_skill_service.py  #   学习文档技能（关键词识别、消息组装）
+│   ├── xhangge_kb_service.py     #   知识库（解析/语义切块/混合检索+重排/删除）
+│   └── xhangge_agent_service.py  #   Agent（七工具、围栏、沙箱、HITL）
+├── gui/                          # 界面层：只负责显示和转发事件
+│   ├── xhangge_main_window.py    #   主窗口（圆角、调度、信号中枢、主题淡入淡出）
+│   ├── xhangge_chat_area.py      #   聊天气泡、输入栏、工具条、吸底滚动
+│   ├── xhangge_sidebar.py        #   侧边栏（会话列表 + 学习模式）
+│   ├── xhangge_settings_page.py  #   ⚙️ 设置窗口（六页）
+│   ├── xhangge_kb_page.py        #   📚 知识库窗口 + 绑定会话弹窗
+│   ├── xhangge_dialogs.py        #   各类可爱弹窗（含 HITL 确认）
+│   ├── xhangge_themes.py         #   三套主题（模板 + 配色生成）
+│   ├── xhangge_cute_progress.py  #   可爱进度条
+│   ├── xhangge_avatars.py        #   圆形头像工具 + 粉色光标
+│   ├── xhangge_resize.py         #   无边框窗口拖边缘调整大小
+│   └── xhangge_splash.py         #   启动画面
+└── tools/                        # 工具
+    ├── xhangge_eval.py           #   RAG 检索召回评测脚本
+    └── xhangge_eval_data.py      #   评测语料 + 100 条 QA
 ```
+
+分层规矩：`gui` 只显示和转发；AI 逻辑全在 `services`；数据全在 `models`；参数和提示词全在 `config`。想改行为先去对应层找，不会迷路喵。
 
 ## 数据保存位置
 
-程序会自动创建 `.xh_snowcat` 文件夹保存数据：
+程序自动创建 `~/.xh_snowcat/`（Windows 在 `C:\Users\你的用户名\.xh_snowcat\`）：
 
-- macOS/Linux：`~/.xh_snowcat/`
-- Windows：`C:\Users\你的用户名\.xh_snowcat\`
+| 文件 / 目录 | 内容 |
+|---|---|
+| `xhangge_chat.db` | 会话、消息、知识库档案、模型配置 |
+| `xhangge_settings.json` | 主题、模式、工作目录等设置 |
+| `xhangge_chroma/` | 知识库向量（ChromaDB） |
+| `xhangge_kb_files/` | 导入文件的**副本**（删知识库只删这里的副本） |
+| `xhangge_agent_notes.md` | Agent 的自进化经验笔记 |
+| `xhangge_user_avatar.png` | 你上传的圆形头像 |
 
-里面主要有：
-
-- `xhangge_chat.db`：聊天会话和消息记录。
-- `xhangge_settings.json`：用户名、主题和学习模式等设置。
-
-这些文件只保存在本机。如果删除它们，聊天历史和用户设置也会被删除，请先备份重要内容。
-
-## 也可以自己找自己喜欢的喵娘去软件图标喵
-方法：
-1. 准备一张 PNG 图片。
-2. 把它重命名为 `icon.png`。
-3. 用它替换项目中的 `assets/icon.png`。
-4. 重新启动程序，或重新打包程序。
-
-建议使用正方形图片哦～，例如 256 x 256 像素。
+这些只在本机。删除它们会丢对应数据，请先备份重要内容。
 
 ## 打包成桌面程序
 
-打包前先进入项目目录并激活虚拟环境，然后确认已经安装依赖：
+macOS（进入项目目录、激活虚拟环境后）：
 
 ```bash
-python -m pip install -r requirements.txt
+pyinstaller snowcat.spec --noconfirm
 ```
 
-### macOS 打包
+完成后在 `dist/snowcat.app` 拿到自包含的应用（约 240MB），拷到别的 Mac（需同样装好 Ollama 和模型）也能跑。spec 里维护着一张「运行时不会加载」的重依赖排除表（onnxruntime、kubernetes、torch 等），能给包省下约 200MB。
 
-```bash
-pyinstaller --noconfirm --windowed --name "XH雪花喵学习助手" --add-data "assets:assets" main.py
-```
-
-完成后，可以在 `dist/` 文件夹里找到：
-
-```text
-dist/XH雪花喵学习助手.app
-```
-
-### Windows 打包
-
-在 PowerShell 中运行：
+Windows 用户可以用：
 
 ```powershell
-pyinstaller --noconfirm --windowed --name "XH雪花喵学习助手" --add-data "assets;assets" main.py
+pyinstaller --noconfirm --windowed --name snowcat --add-data "assets;assets" main.py
 ```
 
-完成后，可以在下面的位置找到程序：
-
-```text
-dist\XH雪花喵学习助手\XH雪花喵学习助手.exe
-```
-
-注意：macOS 和 Windows 的程序需要分别在对应系统上打包，不能指望在 Mac 上直接生成可运行的 Windows 程序。打包后的程序仍然需要用户自己安装 Ollama 和 `qwen2.5:7b`，模型不会被打进安装包。
+注意：打包产物仍需要用户自己安装 Ollama 和模型，模型不会打进安装包。
 
 ## 常见问题
 
 ### 1. 提示无法连接 Ollama
 
-先确认 Ollama 正在运行：
-
 ```bash
 ollama serve
-```
-
-然后确认模型存在：
-
-```bash
 ollama list
 ```
 
-如果没有模型，运行：
+没有模型就点设置里的「⬇️ 一键部署喵」，或在终端 `ollama pull qwen2.5:7b`。用知识库还需要 `bge-m3`。手动装 Ollama：Windows 在 cmd 运行 `irm https://ollama.com/install.ps1 | iex`，macOS 用 `brew install ollama`。
 
-```bash
-ollama pull qwen2.5:7b
-```
+### 2. 在线 API 保存不上
 
-### 2. 提示找不到 `PySide6`
+「保存并使用」会先真实测试，失败会列出常见原因：
 
-确认已经进入项目目录，并且使用了虚拟环境里的 Python：
+1. 接口地址少了结尾的 `/v1`（DeepSeek 应填 `https://api.deepseek.com/v1`）；
+2. 模型名打错（DeepSeek 是 `deepseek-chat`）；
+3. Key 不对或没额度。
+
+测试不过就不会启用，本地模型继续可用，聊天不会被卡死。
+
+### 3. 知识库检索不准 / 回答不好
+
+- 确保已经「📎 绑定会话」把库绑到了当前会话，并在「当前会话喵」卡片打开了「🔍 回答时翻知识库」。
+- 检索默认走「向量召回 + BM25 关键词 + RRF 融合 + 本地大模型重排」；想换更准的交叉编码器重排，改 `config/xhangge_settings.py` 里的 `XHANGGE_RERANK_MODE`。
+- 导入新文档会自动按句子边界切块（不再硬切句子），如果之前导入过，删掉重导一次更准。
+
+### 4. Agent 说「用户还没选工作目录」
+
+这是安全设计：改文件、跑命令必须先在 ⚙️ 设置 → 🤖 Agent 喵 里选一个工作目录（建议专门建一个空文件夹），Agent 只能动这个目录里的东西。
+
+### 5. 找不到 PySide6
+
+确认在项目目录里、用的是虚拟环境的 Python，然后重装依赖：
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-macOS 也可以直接使用：
+### 6. 双击源码文件打不开
 
-```bash
-.venv/bin/python -m pip install -r requirements.txt
-```
+不要双击 `.py` 文件。macOS 双击项目里的 `snowcat.app`，或按「运行软件」一节的命令行方式启动，报错信息才看得见。
 
-### 3. 窗口打开后马上关闭
+### 7. 第一次回答慢 / 知识库导入慢
 
-不要双击源代码文件，先打开终端，再运行：
-
-```bash
-python main.py
-```
-
-这样错误信息会留在终端里，方便定位。
-
-### 4. 第一次回答比较慢
-
-第一次运行模型时，Ollama 需要把模型加载到内存中。等待一会儿是正常现象，后续回答通常会更快。
+首次运行 Ollama 要把模型加载进内存；知识库导入要把文档切块并向量化（本地 bge-m3 逐批跑），大文件等一会儿是正常的。Ollama 和模型状态只在启动时、切换模型时各探测一次，设置窗直接读缓存，不会每次打开都卡一下。
 
 ## 开源协议
 
@@ -333,4 +310,6 @@ python main.py
 
 ## 作者
 
-Made by xhangge
+Made by xhangge 💖
+
+觉得雪花喵可爱的话，去 GitHub 仓库点一颗小星星喵 🌟

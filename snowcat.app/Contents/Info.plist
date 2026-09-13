@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- macOS 认这里：菜单栏最左边的应用名、Dock 悬浮名都来自这个文件 -->
+    <key>CFBundleName</key>
+    <string>snowcat</string>
+    <key>CFBundleDisplayName</key>
+    <string>snowcat</string>
+    <!-- 真正执行的是 Contents/MacOS/snowcat 这个脚本 -->
+    <key>CFBundleExecutable</key>
+    <string>snowcat</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.xhangge.snowcat</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <!-- Dock 里显示的图标（Contents/Resources/icon.icns） -->
+    <key>CFBundleIconFile</key>
+    <string>icon</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>11.0</string>
+    <!-- 双保险：告诉系统这个 app 要原生跑，别扔进 Rosetta
+         （配合启动脚本里的 arch -arm64，双击和命令行行为完全一致喵） -->
+    <key>LSRequiresNativeExecution</key>
+    <true/>
+</dict>
+</plist>

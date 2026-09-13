@@ -1,8 +1,32 @@
 # Author: xhangge
 # This project is created by xhangge
-# XH雪花喵学习助手 依赖清单
+# XH雪花喵学习助手 依赖清单（版本全部锁定，实测于 Python 3.12.7 / macOS arm64）
 # 安装命令：pip install -r requirements.txt
 
-PySide6>=6.4        # 桌面界面框架（Qt6 官方 Python 版）
-requests>=2.28      # 负责和本地 Ollama 服务通信（HTTP 请求）
-pyinstaller>=6.0    # 把程序打包成 .app / .exe 桌面应用（打包阶段才用）
+# ---- 界面层：桌面窗口和所有控件 ----
+PySide6==6.10.3         # Qt6 官方 Python 版，画界面用
+requests==2.32.5        # HTTP 请求（查 Ollama 状态等）
+
+# ---- LangChain 系：统一模型接口 + Agent 编排 ----
+langchain==1.4.0            # 主框架（v1 版，用 create_agent 而非老的 AgentExecutor）
+langchain-community==0.4.2  # 社区工具集合
+langchain-ollama==1.1.0     # 接本地 Ollama 模型
+langchain-openai==1.6.2     # 接 OpenAI 兼容接口（DeepSeek、通义千问都走这个）
+langgraph==1.2.11           # Agent 的状态图引擎，人工检查点靠它的 interrupt
+
+# ---- LlamaIndex 系：文档解析 + 知识库索引 ----
+llama-index-core==0.14.24              # 核心：切块、索引、检索
+llama-index-embeddings-ollama==0.10.0  # 用本地 bge-m3 做向量化
+llama-index-vector-stores-chroma==0.6.0 # 把向量存进 Chroma
+llama-index-readers-file==0.7.0        # 读 pdf / txt / md 等文件
+docx2txt==0.9                          # 单独补的 Word (.docx) 解析
+
+# ---- 向量数据库：知识库的"记忆仓库" ----
+chromadb==1.5.9
+
+# ---- Agent 的联网搜索工具 ----
+ddgs==9.16.0            # DuckDuckGo 搜索（免费、不需要 Key，原名 duckduckgo-search）
+tavily-python==0.8.1    # Tavily 搜索（效果更好，需要自己去官网申请 Key）
+
+# ---- 打包工具（只在打包成 .app 时才用到）----
+pyinstaller==6.22.2

@@ -1,0 +1,23 @@
+#!/bin/zsh
+# Author: xhangge
+# This project is created by xhangge
+# snowcat 启动脚本（macOS 开发运行专用）
+#
+# 为什么要这个东西：直接 ".venv/bin/python main.py" 时，macOS 菜单栏
+# 和 Dock 显示的是进程名「Python」——因为 macOS 只认应用 bundle 里的
+# Info.plist。这个脚本住在 snowcat.app/Contents/MacOS/ 里，
+# 双击 snowcat.app 时由它转交给虚拟环境里的 Python，
+# 菜单栏和 Dock 就会显示「snowcat」和猫娘图标喵。
+#
+# 为什么有 arch -arm64（重要，踩过的坑）：
+# macOS 的 LaunchServices 启动"可执行文件是脚本"的 app 时，
+# 会把整个进程扔进 Rosetta 翻译模式（x86_64）——
+# 而 .venv 里 pip 装的原生模块（pydantic_core 等）都是 arm64 的，
+# 一加载就报 "incompatible architecture"，
+# 表现为"双击打开用不了聊天，命令行启动却正常"。
+# arch -arm64 强制回到原生 arm64 跑 Python，问题消失喵。
+#
+# 路径推导：本脚本在 <项目根>/snowcat.app/Contents/MacOS/ 下，
+# 往上三级就是项目根目录。
+ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+exec arch -arm64 "$ROOT/.venv/bin/python" "$ROOT/main.py"

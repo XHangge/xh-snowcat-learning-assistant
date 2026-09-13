@@ -4,13 +4,11 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
-    <orderEntry type="jdk" jdkName="~/Desktop/personal_proj/xh-snowcat-learning-assistant/.venv" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.13 (xh-snowcat-learning-assistant)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
-  <component name="PackageRequirementsSettings" />
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />
+    <option name="myDocStringFormat" value="Plain" />
   </component>
-  <component name="ReSTService" />
-  <component name="TestRunnerService" />
 </module>
